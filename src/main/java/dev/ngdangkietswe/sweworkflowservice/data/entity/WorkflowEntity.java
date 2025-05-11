@@ -2,12 +2,16 @@ package dev.ngdangkietswe.sweworkflowservice.data.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author ngdangkietswe
@@ -34,4 +38,10 @@ public class WorkflowEntity extends BaseEntity {
 
     @Column
     private boolean is_default;
+
+    @OneToMany(mappedBy = "workflow")
+    private Set<StateEntity> states = new HashSet<>();
+
+    @OneToMany(mappedBy = "workflow")
+    private Set<TransitionEntity> transitions = new HashSet<>();
 }
